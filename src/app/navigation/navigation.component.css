@@ -1,7 +1,13 @@
 .toolbar-container {
-    min-height:10vh
+    min-height:5vh;
 }
 
 .sidenav-container {
-    height: 85vh
+    height: 90vh;
+}
+
+.sidenav-card {
+
+  max-width: 10vw;
+
 }

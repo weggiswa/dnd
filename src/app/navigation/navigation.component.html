@@ -4,14 +4,44 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-drawer-container class="sidenav-container">
-  <mat-drawer #sideNav mode="side" opened="false" position="end">
-    <mat-nav-list>
-      <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
-    </mat-nav-list>
+<mat-drawer-container class="sidenav-container" mode="over">
+  <mat-drawer #sideNav mode="side" opened={{opened}} position="end">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let nav of fillerNav">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{nav}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-card class="sidenav-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Shiba Inu</mat-card-title>
+            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+          <mat-card-content>
+            <p>
+              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+              A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+              bred for hunting.
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <!-- <mat-nav-list>
+       <button *ngFor="let nav of fillerNav"></button> 
+      <mat-expansion-panel *ngFor="let nav of fillerNav">{{nav}}</mat-expansion-panel>
+    </mat-nav-list> -->
   </mat-drawer>
   <mat-drawer-content>
-    <button (click)="sideNav.toggle()" mat-button>Toggle SideNav</button>
     <app-gameboard></app-gameboard>
     <router-outlet></router-outlet>
   </mat-drawer-content>
