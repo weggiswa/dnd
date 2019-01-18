@@ -1,0 +1,19 @@
+  #stage {
+    position: relative;
+  }
+
+  canvas {
+    position: absolute;
+  }
+
+  #grid-layer {
+    z-index: 2
+  }
+
+  #background-layer {
+    z-index: 1
+  }
+
+  mat-slider {
+  width: 300px;
+}

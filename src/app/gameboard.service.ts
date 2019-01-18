@@ -8,10 +8,10 @@ export class GameboardService {
 
   constructor() { }
 
-  setBackgroundImage(url) {
-    var background = new Image();
-    background.src = url;
-    return background
+  redrawGrid(gridwidth: number, ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath()
+    this.drawGrid(gridwidth, ctx, canvas)
   }
 
   drawGrid(gridwidth: number, ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {

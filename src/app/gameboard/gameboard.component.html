@@ -1,3 +1,14 @@
-<div id="Div1" style=" float: left; width: 100%; height: 100%; overflow:scroll; ">
-  <canvas class="canvas" #gameboardCanvas></canvas>
+<!-- <div id="Div1" style=" float: left; width: 100%; height: 100%; overflow:scroll; "> -->
+<!-- <canvas class="gridCanvas" #gridCanvas></canvas> -->
+<!-- <canvas class="canvas" #gameboardCanvas></canvas> -->
+
+<!-- </div> -->
+<div id="stage" style=" float: left; width: 100%; height: 100%; overflow:scroll; ">
+  <canvas id="grid-layer" #gridlayer></canvas>
+  <canvas id="background-layer" #backgroundlayer></canvas>
 </div>
+
+
+<mat-slider class="example-margin" [disabled]="disabled" [invert]="invert" [max]="max" [min]="min" [step]="step"
+  [thumbLabel]="thumbLabel" [tickInterval]="tickInterval" [(value)]="value" [vertical]="vertical" (change)="onChange()">
+</mat-slider>
