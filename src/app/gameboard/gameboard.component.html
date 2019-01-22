@@ -4,11 +4,7 @@
 
 <!-- </div> -->
 <div id="stage" style=" float: left; width: 100%; height: 100%; overflow:scroll; ">
+  <canvas id="player-layer" #playerlayer></canvas>
   <canvas id="grid-layer" #gridlayer></canvas>
   <canvas id="background-layer" #backgroundlayer></canvas>
 </div>
-
-
-<mat-slider class="example-margin" [disabled]="disabled" [invert]="invert" [max]="max" [min]="min" [step]="step"
-  [thumbLabel]="thumbLabel" [tickInterval]="tickInterval" [(value)]="value" [vertical]="vertical" (change)="onChange()">
-</mat-slider>

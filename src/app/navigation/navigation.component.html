@@ -1,19 +1,13 @@
-<mat-toolbar color="primary" class="toolbar-container">
-  <mat-toolbar-row>
-    <h1 class="example-app-name">DnD</h1>
-  </mat-toolbar-row>
-</mat-toolbar>
-
 <mat-drawer-container class="sidenav-container" mode="over">
   <mat-drawer #sideNav mode="side" opened={{opened}} position="end">
     <mat-accordion>
-      <mat-expansion-panel *ngFor="let nav of fillerNav">
+
+      <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{nav}}
+            Example Title
           </mat-panel-title>
         </mat-expansion-panel-header>
-
         <mat-card class="sidenav-card">
           <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
@@ -34,34 +28,55 @@
           </mat-card-actions>
         </mat-card>
       </mat-expansion-panel>
-    </mat-accordion>
 
-    <!-- <mat-nav-list>
-       <button *ngFor="let nav of fillerNav"></button> 
-      <mat-expansion-panel *ngFor="let nav of fillerNav">{{nav}}</mat-expansion-panel>
-    </mat-nav-list> -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Grid Options
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>Grid Size</p>
+        <mat-slider class="example-margin" [max]="gridSizeMax" [min]="gridSizeMin" [step]="gridSizeStep" [(ngModel)]="gridSizeValue"
+          [disabled]="gridSizeDisabled" (ngModelChange)="gridValueOnChange()">
+        </mat-slider>
+        <mat-grid-list cols="2" rowHeight="100px">
+          <mat-grid-tile>
+            <mat-form-field class="matInput">
+              <input matInput type="number" placeholder="Pixels" [(ngModel)]="gridSizeValue" [max]="gridSizeMax" [min]="gridSizeMin"
+                [disabled]="gridSizeDisabled" (ngModelChange)="gridValueOnChange()">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-checkbox class="matCheckbox" [(ngModel)]="gridSizeDisabled">Disabled</mat-checkbox>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <mat-divider></mat-divider>
+
+        <p>Grid Position</p>
+        <mat-grid-list cols="2" rowHeight="100px">
+          <mat-grid-tile>
+            <mat-form-field class="matInput">
+              <input matInput type="number" placeholder="X" [(ngModel)]="gridPositionX" [disabled]="disabled"
+                (ngModelChange)="gridPositionOnChange()">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="matInput">
+              <input matInput type="number" placeholder="Y" [(ngModel)]="gridPositionY" [disabled]="disabled"
+                (ngModelChange)="gridPositionOnChange()"></mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+
+
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
   </mat-drawer>
   <mat-drawer-content>
     <app-gameboard></app-gameboard>
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>
-
-
-
-
-<!-- <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav mode="side" [(opened)]="opened">
-    <mat-nav-list>
-      <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
-    </mat-nav-list>
-  </mat-sidenav>
-
-  <mat-sidenav-content>
-
-    <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
-    <app-gameboard></app-gameboard>
-    <router-outlet></router-outlet>
-
-  </mat-sidenav-content>
-</mat-sidenav-container> -->

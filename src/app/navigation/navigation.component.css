@@ -1,18 +1,25 @@
-.toolbar-container {
-    min-height:5vh;
-}
-
 .sidenav-container {
-    height: 90vh;
+    height: 100%;
 }
 
 .sidenav-card {
+  max-width: 20vw;
+}
 
-  max-width: 10vw;
-
+mat-slider {
+  width: 100%;
 }
 
 .header-image {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
+}
+
+.matInput{
+  align-content: center;
+  width: 100%
+}
+
+.matCheckbox {
+align-content: center;
 }

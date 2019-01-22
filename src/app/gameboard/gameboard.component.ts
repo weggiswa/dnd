@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { GameboardService } from '../gameboard.service'
 
 @Component({
@@ -6,53 +6,37 @@ import { GameboardService } from '../gameboard.service'
   templateUrl: './gameboard.component.html',
   styleUrls: ['./gameboard.component.css']
 })
-export class GameboardComponent implements OnInit {
+export class GameboardComponent {
+
+  // background canvas
   @ViewChild('backgroundlayer') backgroundCanvas: ElementRef;
-  @ViewChild('gridlayer') gridCanvas: ElementRef;
   public bCanvas: HTMLCanvasElement
+
+  // grid canvas
+  @ViewChild('gridlayer') gridCanvas: ElementRef;
   public gCanvas: HTMLCanvasElement
-  public backgroundContext: CanvasRenderingContext2D;
-  public gridContext: CanvasRenderingContext2D;
-  background: HTMLImageElement
-  autoTicks = false;
-  disabled = false;
-  invert = false;
-  max = 100;
-  min = 25;
-  showTicks = false;
-  step = 1;
-  thumbLabel = false;
-  value = 50;
-  vertical = false;
 
   constructor(private gameboardService: GameboardService) { }
 
-  ngOnInit() {
-  }
 
   ngAfterViewInit(): void {
-    let that = this
+
     this.gCanvas = (<HTMLCanvasElement>this.gridCanvas.nativeElement)
-    this.gridContext = (<HTMLCanvasElement>this.gridCanvas.nativeElement).getContext('2d');
     this.bCanvas = (<HTMLCanvasElement>this.backgroundCanvas.nativeElement)
-    this.backgroundContext = (<HTMLCanvasElement>this.backgroundCanvas.nativeElement).getContext('2d');
-
-    var background = new Image();
-    background.src = "assets/images/backgrounds/1.jpg";
-
-    background.onload = function () {
-      that.backgroundContext.canvas.height = background.height
-      that.backgroundContext.canvas.width = background.width
-      that.gridContext.canvas.height = background.height
-      that.gridContext.canvas.width = background.width
-      that.backgroundContext.drawImage(background, 0, 0);
-      that.gameboardService.drawGrid(100, that.gridContext, that.gCanvas)
-    }
+    this.gameboardService.setCanvases(this.gridCanvas, this.backgroundCanvas)
+    this.gameboardService.initCanvases()
   }
 
-  onChange() {
-    console.log('redrawing with value: ' + this.value)
-    this.gameboardService.redrawGrid(this.value, this.gridContext, this.gCanvas)
+  @HostListener('document:keydown', ['$event'])
+  public handleKeyboardEvent(event: KeyboardEvent): void {
+    console.log('key')
+    if (event.key === '+') {
+      console.log('plus')
+
+    } else
+      if (event.key === '-') {
+
+      }
   }
 }
 
