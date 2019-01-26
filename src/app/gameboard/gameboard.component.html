@@ -3,8 +3,8 @@
 <!-- <canvas class="canvas" #gameboardCanvas></canvas> -->
 
 <!-- </div> -->
-<div id="stage" style=" float: left; width: 100%; height: 100%; overflow:scroll; ">
-  <canvas id="player-layer" #playerlayer></canvas>
+<div id="stage" #stage style=" float: left; width: 100%; height: 100%; overflow:scroll; ">
+  <div #draggableDiv class="onTop draggableDiv saveable"></div>
   <canvas id="grid-layer" #gridlayer></canvas>
   <canvas id="background-layer" #backgroundlayer></canvas>
 </div>

@@ -1,25 +1,29 @@
-  #stage {
-    position: relative;
-  }
+#stage {
+  position: relative;
+}
 
-  canvas {
-    position: absolute;
-  }
+canvas {
+  position: absolute;
+}
 
-  #grid-layer {
-    z-index: 2
-  }
+#grid-layer {
+  z-index: 2;
+}
 
-  #background-layer {
-    z-index: 1
-  }
+#background-layer {
+  z-index: 1;
+}
 
-
-::-webkit-scrollbar { 
-    display: none; 
+::-webkit-scrollbar {
+  display: none;
 }
 
 html {
-    overflow: scroll;
-    overflow-x: hidden;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.onTop {
+  z-index: 4;
+  position: absolute;
 }

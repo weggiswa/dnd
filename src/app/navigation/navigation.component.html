@@ -1,39 +1,58 @@
 <mat-drawer-container class="sidenav-container" mode="over">
-  <mat-drawer #sideNav mode="side" opened={{opened}} position="end">
+  <mat-drawer #sideNav mode="side" opened="{{ opened }}" position="end">
     <mat-accordion>
-
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title>
-            Example Title
-          </mat-panel-title>
+          <mat-panel-title> Objects </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-card class="sidenav-card">
+
+
+        <mat-card class="sidenav-card" *ngFor="let object of objects.objects">
           <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Shiba Inu</mat-card-title>
-            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+            <mat-card-title>{{object.name}}</mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
           </mat-card-header>
-          <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+          <img class="sidebarImage" mat-card-image src={{object.url}} alt="Photo of a Shiba Inu" />
           <mat-card-content>
-            <p>
-              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-              A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-              bred for hunting.
-            </p>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
+            <div class="center">
+              <button mat-button (click)="addImageToCanvas(object)">Add</button>
+            </div>
           </mat-card-actions>
         </mat-card>
+
       </mat-expansion-panel>
 
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title>
-            Grid Options
-          </mat-panel-title>
+          <mat-panel-title> Backgrounds </mat-panel-title>
+        </mat-expansion-panel-header>
+
+
+        <mat-card class="sidenav-card" *ngFor="let object of objects.backgrounds">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{object.name}}</mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+          </mat-card-header>
+          <img class="sidebarImage" mat-card-image src={{object.url}} alt="Photo of a Shiba Inu" />
+          <mat-card-content>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="center">
+              <button mat-button (click)="setCanvasBackground(object)">Add</button>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+
+      </mat-expansion-panel>
+
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Grid Options </mat-panel-title>
         </mat-expansion-panel-header>
         <p>Grid Size</p>
         <mat-slider class="example-margin" [max]="gridSizeMax" [min]="gridSizeMin" [step]="gridSizeStep" [(ngModel)]="gridSizeValue"
@@ -43,7 +62,7 @@
           <mat-grid-tile>
             <mat-form-field class="matInput">
               <input matInput type="number" placeholder="Pixels" [(ngModel)]="gridSizeValue" [max]="gridSizeMax" [min]="gridSizeMin"
-                [disabled]="gridSizeDisabled" (ngModelChange)="gridValueOnChange()">
+                [disabled]="gridSizeDisabled" (ngModelChange)="gridValueOnChange()" />
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>
@@ -58,24 +77,26 @@
           <mat-grid-tile>
             <mat-form-field class="matInput">
               <input matInput type="number" placeholder="X" [(ngModel)]="gridPositionX" [disabled]="disabled"
-                (ngModelChange)="gridPositionOnChange()">
+                (ngModelChange)="gridPositionOnChange()" />
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field class="matInput">
               <input matInput type="number" placeholder="Y" [(ngModel)]="gridPositionY" [disabled]="disabled"
-                (ngModelChange)="gridPositionOnChange()"></mat-form-field>
+                (ngModelChange)="gridPositionOnChange()" /></mat-form-field>
           </mat-grid-tile>
         </mat-grid-list>
-
-
-
-
       </mat-expansion-panel>
-
     </mat-accordion>
   </mat-drawer>
+
   <mat-drawer-content>
+    <div id="toggleButtonDiv" class="onTop">
+      <button id="toggleButton" mat-mini-fab color="primary" (click)="buttonMenuToggle()">
+        <i class="material-icons"> menu </i>
+      </button>
+    </div>
+
     <app-gameboard></app-gameboard>
     <router-outlet></router-outlet>
   </mat-drawer-content>

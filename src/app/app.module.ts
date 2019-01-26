@@ -9,6 +9,9 @@ import { AppComponent } from './app.component';
 import { GameboardComponent } from './gameboard/gameboard.component';
 import { NavigationComponent } from './navigation/navigation.component';
 
+// Import KonvaModule
+import { KonvaModule } from 'ng2-konva';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +24,8 @@ import { NavigationComponent } from './navigation/navigation.component';
     MaterialModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    KonvaModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,42 @@
+<html>
+
+
+
+<body>
+    <button onclick="scale()" style="height:50px; width:100px;"></button>
+    <canvas id="canvas"></canvas>
+</body>
+
+
+
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    let background = new Image();
+    background.src = "src/assets/images/backgrounds/1.jpg";
+    background.onload = function () {
+        ctx.canvas.width = background.width
+        ctx.canvas.height = background.height
+        ctx.drawImage(background, 0, 0);
+    }
+    // Scaled rectangle
+    ctx.scale(9, 3);
+    ctx.fillStyle = 'red';
+    ctx.fillRect(0, 0, 10, 10);
+
+    // Reset current transformation matrix to the identity matrix
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+    // Non-scaled rectangle
+    ctx.fillStyle = 'gray';
+    ctx.fillRect(0, 0, 10, 10);
+
+    function scale() {
+        ctx.clearRect(0, 0, ctx.canvas.width, canvas.height)
+        ctx.scale(0.5, 0.5)
+        ctx.drawImage(background, 0, 0);
+    }
+</script>
+
+</html>

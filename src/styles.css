@@ -4,4 +4,9 @@
 body {
     margin:0;padding:0;
     height: calc(100vh);
+    overflow: hidden !important;
+}
+
+@-moz-document url-prefix() {
+    html,body{overflow: hidden !important;}
 }
