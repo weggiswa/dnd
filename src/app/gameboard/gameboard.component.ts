@@ -16,7 +16,7 @@ import { ObjectsService } from "../services/objects.service";
 export class GameboardComponent {
   // grid canvas
   @ViewChild("stage") stage: ElementRef;
-  @ViewChild("draggableDiv") draggableDiv: ElementRef;
+  @ViewChild("draggableImg") draggableImg: ElementRef;
   // background canvas
   @ViewChild("backgroundlayer") backgroundCanvas: ElementRef;
 
@@ -31,7 +31,7 @@ export class GameboardComponent {
   ngAfterViewInit(): void {
     this.gameboardService.setCanvases(this.gridCanvas, this.backgroundCanvas);
     this.gameboardService.initCanvases();
-    this.objectsService.setStage(this.stage, this.draggableDiv);
+    this.objectsService.setStage(this.stage, this.draggableImg);
   }
 
   @HostListener("document:keydown", ["$event"])
@@ -48,7 +48,11 @@ export class GameboardComponent {
   @HostListener('document:contextmenu', ['$event'])
   onClick(e) {
     console.log(e.target)
-    this.objectsService.rotateElement(e.target)
+    let element: HTMLElement = e.target
+    if (element.classList.contains('rotateable')) {
+      this.objectsService.rotateElement(e.target)
+    }
+
     return false
   }
 

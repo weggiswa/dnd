@@ -8,28 +8,26 @@ import { GameboardService } from './gameboard.service';
 })
 export class ObjectsService {
   stage: HTMLDivElement;
-  draggableDiv: HTMLDivElement;
+  draggableImg: HTMLDivElement;
   objects: Object[];
   objectsOnBoard: Array<ObjectsProperties> = []
   idCounter: number = 0
 
   constructor(private gameboardService: GameboardService) { }
 
-  setStage(stage: ElementRef, draggableDiv: ElementRef) {
+  setStage(stage: ElementRef, draggableImg: ElementRef) {
     this.stage = <HTMLDivElement>stage.nativeElement;
-    this.draggableDiv = <HTMLDivElement>draggableDiv.nativeElement;
+    this.draggableImg = <HTMLDivElement>draggableImg.nativeElement;
   }
 
   addImageToStage(object: Object) {
-    let div = <HTMLDivElement>this.draggableDiv.cloneNode(false);
-    div.id = this.idCounter.toString();
+    let img = <HTMLDivElement>this.draggableImg.cloneNode(false);
+    img.id = this.idCounter.toString();
     let width = object.width * this.gameboardService.getGridSize()
-    let img = document.createElement("IMG");
     img.setAttribute("src", object.url);
     img.setAttribute("width", width.toString());
-    div.appendChild(img);
-    this.makeElementDraggable(div);
-    this.stage.appendChild(div);
+    this.makeElementDraggable(img);
+    this.stage.appendChild(img);
     this.addObjectProperties(object)
     this.idCounter++
   }
