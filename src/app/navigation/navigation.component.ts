@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from "@angular/core";
 import { GameboardService } from "../services/gameboard.service";
 import { ObjectsService } from "../services/objects.service";
 import { UtilsService } from "../services/utils.service";
-import { Result, ObjectsProperties, Object } from "../object.interface";
+import { Result, MoveableObject } from "../object.interface";
 
 @Component({
   selector: "app-navigation",
@@ -82,11 +82,12 @@ export class NavigationComponent implements OnInit {
     this.toggleSideNav();
   }
 
-  addImageToCanvas(object: Object) {
-    this.objectsService.addImageToStage(object)
+  addImageToCanvas(object: MoveableObject) {
+    let newObject: MoveableObject = Object.assign({}, object); // create new object to avoid id issues, as all references would be to the same object
+    this.objectsService.addImageToStage(newObject)
   }
 
-  setCanvasBackground(object: Object) {
+  setCanvasBackground(object: MoveableObject) {
     this.gameboardService.setBackgroundImage(object.url)
   }
 }

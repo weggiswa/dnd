@@ -1,4 +1,4 @@
-export class Object {
+export class MoveableObject {
   name: string;
   url: string;
   type: string;
@@ -7,11 +7,11 @@ export class Object {
 }
 
 export class Result {
-  objects: Array<Object>;
-  backgrounds: Array<Object>;
+  objects: Array<MoveableObject>;
+  backgrounds: Array<MoveableObject>;
 }
 
-export class ObjectsProperties {
+export class MoveableObjectProperties {
   id: string;
   name: string;
   url: string;

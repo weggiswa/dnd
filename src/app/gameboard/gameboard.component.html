@@ -3,8 +3,24 @@
 <!-- <canvas class="canvas" #gameboardCanvas></canvas> -->
 
 <!-- </div> -->
-<div id="stage" #stage style=" float: left; width: 100%; height: 100%; overflow:scroll; ">
-  <img #draggableImg class="onTop draggableDiv rotateable" src="" alt="">
+<div
+  id="stage"
+  #stage
+  style=" float: left; width: 100%; height: 100%; overflow:scroll; "
+  (contextmenu)="onrightClick($event)"
+  (click)="disableContextMenu()"
+  oncontextmenu="return false;"
+>
+  <img #draggableImg class="onTop draggableDiv rotateable" src="" alt="" />
   <canvas id="grid-layer" #gridlayer></canvas>
   <canvas id="background-layer" #backgroundlayer></canvas>
+</div>
+
+<!--you have to write this only once in your component-->
+<div *ngIf="contextmenu == true">
+  <app-context-menu
+    [x]="contextmenuX"
+    [y]="contextmenuY"
+    [rightClickedElement]="rightClickedElement"
+  ></app-context-menu>
 </div>

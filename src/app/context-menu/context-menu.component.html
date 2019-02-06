@@ -1,0 +1,23 @@
+<div class="contextmenu" [ngStyle]="{ 'left.px': x, 'top.px': y }">
+  <div class="menu-options">
+    <div class="menu-option" (click)="rotate(180)">
+      <span class="menu-text">Rotate Up</span>
+    </div>
+    <div class="menu-option" (click)="rotate(270)">
+      <span class="menu-text">Rotate Right</span>
+    </div>
+    <div class="menu-option" (click)="rotate(0)">
+      <span class="menu-text">Rotate Down</span>
+    </div>
+    <div class="menu-option" (click)="rotate(90)">
+      <span class="menu-text">Rotate Left</span>
+    </div>
+    <div class="menu-option" (click)="rotateBy45()">
+      <span class="menu-text">Rotate by 45°</span>
+    </div>
+    <hr />
+    <div class="menu-option" (click)="delete()">
+      <span class="menu-text">Delete</span>
+    </div>
+  </div>
+</div>

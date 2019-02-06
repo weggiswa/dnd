@@ -23,15 +23,37 @@ export class GameboardComponent {
   // grid canvas
   @ViewChild("gridlayer") gridCanvas: ElementRef;
 
+  contextmenu = false;
+  contextmenuX = 0;
+  contextmenuY = 0;
+  rightClickedElement: HTMLElement;
+
   constructor(
     private gameboardService: GameboardService,
     private objectsService: ObjectsService
-  ) { }
+  ) {}
 
   ngAfterViewInit(): void {
     this.gameboardService.setCanvases(this.gridCanvas, this.backgroundCanvas);
     this.gameboardService.initCanvases();
     this.objectsService.setStage(this.stage, this.draggableImg);
+  }
+
+  //activates the menu with the coordinates
+  onrightClick(event) {
+    let element: HTMLElement = event.target;
+    if (element.classList.contains("rotateable")) {
+      this.contextmenuX = event.clientX;
+      this.contextmenuY = event.clientY;
+      this.contextmenu = true;
+      this.rightClickedElement = element;
+    }
+  }
+
+  //disables the menu
+  disableContextMenu() {
+    this.contextmenu = false;
+    this.rightClickedElement = null;
   }
 
   @HostListener("document:keydown", ["$event"])
@@ -45,15 +67,14 @@ export class GameboardComponent {
     }
   }
 
-  @HostListener('document:contextmenu', ['$event'])
-  onClick(e) {
-    console.log(e.target)
-    let element: HTMLElement = e.target
-    if (element.classList.contains('rotateable')) {
-      this.objectsService.rotateElement(e.target)
-    }
+  // @HostListener('document:contextmenu', ['$event'])
+  // onClick(e) {
+  //   console.log(e.target)
+  //   let element: HTMLElement = e.target
+  //   if (element.classList.contains('rotateable')) {
+  //     this.objectsService.rotateElementBy45(e.target);
+  //   }
 
-    return false
-  }
-
+  //   return false
+  // }
 }

@@ -1,6 +1,6 @@
-import { Object } from "./object.interface";
+import { MoveableObject } from "./object.interface";
 
-export const OBJECTS: Object[] = [
+export const OBJECTS: MoveableObject[] = [
   {
     name: "Owlbear",
     url: "assets/images/objects/owlbear.png",

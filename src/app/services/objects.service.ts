@@ -1,7 +1,12 @@
 import { Injectable, ElementRef } from "@angular/core";
-import { Object, Result, ObjectsProperties, Coordinates } from "../object.interface";
+import {
+  MoveableObject,
+  Result,
+  MoveableObjectProperties,
+  Coordinates
+} from "../object.interface";
 import { OBJECTS } from "../mock-objects";
-import { GameboardService } from './gameboard.service';
+import { GameboardService } from "./gameboard.service";
 
 @Injectable({
   providedIn: "root"
@@ -9,51 +14,72 @@ import { GameboardService } from './gameboard.service';
 export class ObjectsService {
   stage: HTMLDivElement;
   draggableImg: HTMLDivElement;
-  objects: Object[];
-  objectsOnBoard: Array<ObjectsProperties> = []
-  idCounter: number = 0
+  objects: MoveableObject[];
+  objectsOnBoard: Array<MoveableObjectProperties> = [];
+  idCounter: number = 0;
 
-  constructor(private gameboardService: GameboardService) { }
+  constructor(private gameboardService: GameboardService) {}
 
   setStage(stage: ElementRef, draggableImg: ElementRef) {
     this.stage = <HTMLDivElement>stage.nativeElement;
     this.draggableImg = <HTMLDivElement>draggableImg.nativeElement;
   }
 
-  addImageToStage(object: Object) {
+  addImageToStage(object: MoveableObject) {
     let img = <HTMLDivElement>this.draggableImg.cloneNode(false);
     img.id = this.idCounter.toString();
-    let width = object.width * this.gameboardService.getGridSize()
+    let width = object.width * this.gameboardService.getGridSize();
     img.setAttribute("src", object.url);
     img.setAttribute("width", width.toString());
     this.makeElementDraggable(img);
     this.stage.appendChild(img);
-    this.addObjectProperties(object)
-    this.idCounter++
+    this.addObjectProperties(object);
   }
 
   addObjectProperties(object) {
-    object.position = {}
-    object.position.x = 0
-    object.position.y = 0
-    object.rotation = 0
-    object.id = this.idCounter.toString()
-    this.objectsOnBoard.push(object)
+    object.position = {};
+    object.position.x = 0;
+    object.position.y = 0;
+    object.rotation = 0;
+    object.id = this.idCounter.toString();
+    this.objectsOnBoard.push(object);
+    this.idCounter++;
+    console.log(this.idCounter);
+    console.log(this.objectsOnBoard);
   }
 
   makeElementDraggable(element) {
     this.dragElement(element);
   }
 
-  getObjects(): Object[] {
+  getObjects(): MoveableObject[] {
     return OBJECTS;
   }
 
-  rotateElement(element: HTMLElement) {
-    let filteredObjectsOnBoard = this.objectsOnBoard.filter(object => object.id === element.id)
-    let object: ObjectsProperties = filteredObjectsOnBoard[0]
-    object.rotation = (object.rotation + 45) % 360
-    element.style.transform = `rotate(${object.rotation}deg)`
+  rotateElementBy45(element: HTMLElement) {
+    let filteredObjectsOnBoard = this.objectsOnBoard.filter(
+      object => object.id === element.id
+    );
+    let object: MoveableObjectProperties = filteredObjectsOnBoard[0];
+    object.rotation = (object.rotation + 45) % 360;
+    element.style.transform = `rotate(${object.rotation}deg)`;
+  }
+
+  rotateElement(element: HTMLElement, degree: number) {
+    let filteredObjectsOnBoard = this.objectsOnBoard.filter(
+      object => object.id === element.id
+    );
+    let object: MoveableObjectProperties = filteredObjectsOnBoard[0];
+    object.rotation = degree;
+    element.style.transform = `rotate(${degree}deg)`;
+  }
+
+  deleteElement(element: HTMLElement) {
+    this.objectsOnBoard = this.objectsOnBoard.filter(
+      obj => obj.id !== element.id
+    );
+    // let parentDiv = element.parentElement;
+    element.parentElement.removeChild(element);
   }
 
   getObjectsInfo(): Result {
@@ -75,14 +101,15 @@ export class ObjectsService {
   }
 
   updateObjectProperties(id: string, position: Coordinates) {
-    let filteredObjectsOnBoard = this.objectsOnBoard.filter(object => object.id === id)
-    let object: ObjectsProperties = filteredObjectsOnBoard[0]
-    object.position = position
+    let filteredObjectsOnBoard = this.objectsOnBoard.filter(
+      object => object.id === id
+    );
+    let object: MoveableObjectProperties = filteredObjectsOnBoard[0];
+    object.position = position;
   }
 
-
   dragElement(elmnt: HTMLElement) {
-    let that = this
+    let that = this;
     var pos1 = 0,
       pos2 = 0,
       pos3 = 0,
@@ -123,14 +150,9 @@ export class ObjectsService {
       // stop moving when mouse button is released:
       document.onmouseup = null;
       document.onmousemove = null;
-      let coords: Coordinates = { x: elmnt.style.top, y: elmnt.style.left }
-      that.updateObjectProperties(elmnt.id, coords)
-
+      let coords: Coordinates = { x: elmnt.style.top, y: elmnt.style.left };
+      that.updateObjectProperties(elmnt.id, coords);
+      console.log(that.objectsOnBoard);
     }
   }
-
-
-
 }
-
-

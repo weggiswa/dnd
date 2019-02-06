@@ -11,12 +11,15 @@ import { NavigationComponent } from './navigation/navigation.component';
 
 // Import KonvaModule
 import { KonvaModule } from 'ng2-konva';
+import { ContextMenuComponent } from './context-menu/context-menu.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     GameboardComponent,
-    NavigationComponent
+    NavigationComponent,
+    ContextMenuComponent
   ],
   imports: [
     BrowserModule,
