@@ -44,9 +44,9 @@ export class GameboardComponent {
     let element: HTMLElement = event.target;
     if (element.classList.contains("rotateable")) {
       this.contextmenuX = event.clientX;
-      this.contextmenuY = event.clientY;
-      this.contextmenu = true;
+      this.contextmenuY = event.clienty;
       this.rightClickedElement = element;
+      this.contextmenu = true;
     }
   }
 
